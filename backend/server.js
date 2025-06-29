@@ -21,7 +21,7 @@ app.use(express.json());
 
 //route prefix 
 const todoRoutes= require('./routes/todos')
-app.use('/app/v1', todoRoutes);
+app.use('/api/v1', todoRoutes);
 
 
 //default route

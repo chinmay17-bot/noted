@@ -1,14 +1,14 @@
 const Todo = require("../models/todo");
-const createTodo = async (req, res) => {
+const getTodos = async (req, res) => {
   try {
-    const { title, description } = req.body;
-    const response = await Todo.create({ title, description });
+    const todos = await Todo.find({});
     res.status(200).json({
       success: true,
-      data: response,
-      message: "entry created",
+      data: todos,
+      message: "Fetched succesfully",
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
       data: "Internal server error",
@@ -17,4 +17,4 @@ const createTodo = async (req, res) => {
   }
 };
 
-module.exports = { createTodo };
+module.exports = { getTodos };

@@ -1,12 +1,14 @@
 const Todo = require("../models/todo");
-const createTodo = async (req, res) => {
+const deleteTodo = async (req, res) => {
   try {
-    const { title, description } = req.body;
-    const response = await Todo.create({ title, description });
+    const id = req.params.id;
+    const response = await Todo.findByIdAndDelete(
+      { _id: id },
+    );
     res.status(200).json({
       success: true,
       data: response,
-      message: "entry created",
+      message: "Deleted successfully",
     });
   } catch (err) {
     res.status(500).json({
@@ -17,4 +19,4 @@ const createTodo = async (req, res) => {
   }
 };
 
-module.exports = { createTodo };
+module.exports = { deleteTodo };

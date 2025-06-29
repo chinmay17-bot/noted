@@ -1,12 +1,17 @@
 const Todo = require("../models/todo");
-const createTodo = async (req, res) => {
+const updateTodo = async (req, res) => {
   try {
+    const id = req.params.id;
     const { title, description } = req.body;
-    const response = await Todo.create({ title, description });
+    const updatedTime = Date.now();
+    const response = await Todo.findByIdAndUpdate(
+      { _id: id },
+      { title, description, updatedAt: updatedTime }
+    );
     res.status(200).json({
       success: true,
       data: response,
-      message: "entry created",
+      message: "Updated successfully",
     });
   } catch (err) {
     res.status(500).json({
@@ -17,4 +22,4 @@ const createTodo = async (req, res) => {
   }
 };
 
-module.exports = { createTodo };
+module.exports = { updateTodo };
